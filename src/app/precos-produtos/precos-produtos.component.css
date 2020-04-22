@@ -1,0 +1,14 @@
+.sub-titulo-produto{
+    font-size: 12px;
+    font-weight: bold;
+}
+.col-valor{
+    text-align: center;
+    font-size: 15px;
+}
+.button-sair{
+    padding: 0px 2px;
+    position: relative;
+    height:1px;
+    left: 75%;
+}

@@ -1,0 +1,48 @@
+<div class="containerPrincipal">
+    <header> 
+        <p-button label="Sair" class="button button-sair" routerLink="/login"></p-button>
+        <h2>Consulta de Preços</h2>
+    </header>
+
+    <div class="ui-g">
+        <form #usuarioForm = "ngForm">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-fluid" style="width: 220px;">
+                    <p-dropdown [options]="produtos" [filter]="true" filterBy="label" [(ngModel)]="produto" 
+                    name="produto" #p placeholder="Selecione um produto" 
+                    [virtualScroll]="true" itemSize="10" resetFilterOnHide="true" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"></p-dropdown>
+            </div>
+                <div class="ui-g-12 ui-md-12">
+                    <p-button label="Pesquisar" (click)=" pesquisarTabela()"></p-button>                
+                </div>
+            </div>
+        </form>
+        <div class="ui-g-12 ui-md-12 ui-lg-12 sub-titulo-produto">
+            Produto: {{p.value}} -  {{p.label}}
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12 ui-fluid">
+                <p-table [value]="tabelaPrecos">
+                    <ng-template pTemplate="header">
+                    <tr class="sub-titulo-produto">
+                        <th>
+                                Preço Coop.<br> Preço Não Coop. / Prod.
+                        </th>  
+                        <th>
+                                Preço Não Coop./Não Prod.
+                        </th>                  
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-col>
+                        <tr>
+                            <td class="col-valor">
+                                {{ col.precoCooperado | currency: 'BRL' }}
+                            </td>   
+                            <td class="col-valor">
+                                {{ col.precoNaoCooperado | currency: 'BRL' }}
+                            </td> 
+                        </tr>
+                    </ng-template>
+                    </p-table>
+                </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+@media (min-width: 1200px) {
+    .containerLogin {
+      width: 300px;
+      margin: 0 auto;
+    }
+  }
+@media (min-width: 1200px) {
+    .containerPrincipal {
+      width: 700px;
+      margin: 0 auto;
+    }
+  }  
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #404C51;
+  }
