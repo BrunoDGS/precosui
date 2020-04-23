@@ -23,6 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
 registerLocaleData(ptBr);
 
 import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from './login/auth.guard';
 
 export function  tokenGetter() {
   return localStorage.getItem('token');
@@ -57,7 +58,8 @@ export function  tokenGetter() {
     {
       provide: LOCALE_ID, useValue: 'pt-PT'
     },
-    LoginService
+    LoginService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
