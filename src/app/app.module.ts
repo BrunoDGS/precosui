@@ -20,11 +20,13 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
-
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-
 registerLocaleData(ptBr);
 
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function  tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -43,14 +45,13 @@ registerLocaleData(ptBr);
     HttpClientModule,
     FormsModule,
     InputTextModule,
-     // Jwt Token Injection
-     JwtModule.forRoot({
-      jwtOptionsProvider: {
-          provide: JWT_OPTIONS,
-          globalHeaders: [{ 'Content-Type': 'application/json' }],
-          deps: [LoginService]
+
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: [/localhost:8080/]
       }
-  })
+    })
   ],
   providers: [PrecosProdutosService, FormsModule,
     {
