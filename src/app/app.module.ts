@@ -24,6 +24,7 @@ registerLocaleData(ptBr);
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './login/auth.guard';
+import { NegadoComponent } from './negado/negado.component';
 
 export function  tokenGetter() {
   return localStorage.getItem('token');
@@ -34,7 +35,8 @@ export function  tokenGetter() {
     AppComponent,
     PrecosProdutosComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    NegadoComponent
   ],
   imports: [
     BrowserModule,

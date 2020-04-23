@@ -1,3 +1,4 @@
+import { NegadoComponent } from './negado/negado.component';
 import { PrecosProdutosComponent } from './precos-produtos/precos-produtos.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,9 @@ const routes: Routes = [
     path: 'precos',
     component: PrecosProdutosComponent,
     canActivate: [AuthGuard]
-  }
+  },
+  { path: 'acesso-negado', component: NegadoComponent },
+  { path: '**', redirectTo: 'acesso-negado' }
 ];
 
 @NgModule({
