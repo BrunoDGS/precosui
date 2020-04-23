@@ -4,20 +4,20 @@
     <div class="ui-g">
          <div class="ui-g-12 ui-md-12 ui-fluid input-form form-group">
             <span class="ui-float-label">
-                <input id="float-input" type="text" size="30" pInputText [required]="true" name="usuario" #usuario> 
+                <input id="float-input" type="text" size="30" pInputText [required]="true" name="usuario" #usuario ngModel> 
                 <label for="float-input">Usuário</label>
             </span>
      </div>
      <div class="ui-g-12 ui-md-12 ui-fluid input-form form-group">
         <span class="ui-float-label">
-            <input id="float-input" type="password" size="30" pInputText [required]="true" name="senha" #senha> 
+            <input id="float-input" type="password" size="30" pInputText [required]="true" name="senha" #senha ngModel> 
             <label for="float-input">Senha</label>
         </span>            
     </div>
         <div class="ui-g-12 ui-md-12 ui-fluid">
 
             <button pButton type="button" label="Login" type="submit" 
-            [disabled]="!usuarioFormLogin.valid" (click)="login(usuario.value, senha.value)"></button>        
+            [disabled]="!usuarioFormLogin.valid" (click)="login(usuario.value, senha.value); senha.value = '';"></button>        
     
         </div>
     </div>
