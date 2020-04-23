@@ -20,7 +20,7 @@ export class LoginService {
   login(usuario: string, senha: string): Observable<any> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    headers.append('Authorization', 'Basic YW5ndWxhcjogY2VydHJpbQ==');
+    headers.append('Authorization', 'Basic YW5ndWxhcjpjZXJ0cmlt');
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
@@ -46,7 +46,7 @@ private carregarToken() {
 obterNovoAccessToken(): Observable<any> {
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/x-www-form-urlencoded');
-  headers.append('Authorization', 'Basic YW5ndWxhcjogY2VydHJpbQ==');
+  headers.append('Authorization', 'Basic YW5ndWxhcjpjZXJ0cmlt');
 
   const body = 'grant_type=refresh_token';
 
