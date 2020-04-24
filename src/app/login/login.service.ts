@@ -18,9 +18,9 @@ export class LoginService {
    }
 
   recuperarToken(usuario: string, senha: string): any {
-    const headers = new HttpHeaders();
-    headers.append('Authorization', 'Basic YW5ndWxhcjpjZXJ0cmlt');
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YW5ndWxhcjpjZXJ0cmlt')
+    .append('Content-Type', 'application/x-www-form-urlencoded');
     // headers.append('Cache-Control', 'no-cache');
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
