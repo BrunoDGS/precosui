@@ -8,14 +8,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class LoginService {
 
-  helper = new JwtHelperService();
-
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
   jwtPayload: any;
 
-  token: any;
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private helper: JwtHelperService) {
     this.carregarToken();
    }
 
@@ -30,7 +26,7 @@ export class LoginService {
     return this.http.post<any>(this.oauthTokenUrl, body,
       { headers, withCredentials: true })
       .subscribe(response => {
-        this.armazenarToken(response);
+        this.armazenarToken(response.access_token);
       });
 
 }

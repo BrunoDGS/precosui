@@ -15,6 +15,7 @@ import { PrecosProdutosComponent } from './precos-produtos/precos-produtos.compo
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { PrecosService } from './login/precos.service';
+import { NegadoComponent } from './negado/negado.component';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
@@ -23,10 +24,11 @@ import { InputTextModule } from 'primeng/inputtext';
 registerLocaleData(ptBr);
 
 import { JwtModule } from '@auth0/angular-jwt';
-import { AuthGuard } from './login/auth.guard';
-import { NegadoComponent } from './negado/negado.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
-export function  tokenGetter() {
+import { AuthGuard } from './login/auth.guard';
+
+export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
@@ -52,7 +54,8 @@ export function  tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        whitelistedDomains: [/localhost:8080/]
+        whitelistedDomains: [/localhost:8080/],
+        blacklistedRoutes: [/\/oauth\/token/]
       }
     })
   ],
@@ -61,7 +64,9 @@ export function  tokenGetter() {
       provide: LOCALE_ID, useValue: 'pt-PT'
     },
     LoginService,
-    AuthGuard
+    AuthGuard,
+    JwtHelperService,
+    PrecosService
   ],
   bootstrap: [AppComponent]
 })
