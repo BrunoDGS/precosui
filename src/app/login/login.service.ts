@@ -13,6 +13,8 @@ export class LoginService {
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
   jwtPayload: any;
 
+  token: any;
+
   constructor(private http: HttpClient) {
     this.carregarToken();
    }
@@ -27,7 +29,9 @@ export class LoginService {
 
     return this.http.post<any>(this.oauthTokenUrl, body,
       { headers, withCredentials: true })
-      .subscribe(resp => this.armazenarToken(resp));
+      .subscribe(response => {
+        this.armazenarToken(response);
+      });
 
 }
 private armazenarToken(token: string) {
@@ -45,10 +49,9 @@ private carregarToken() {
 }
 
 obterNovoAccessToken(): Observable<any> {
-  const headers = new HttpHeaders();
-  headers.append('Authorization', 'Basic YW5ndWxhcjpjZXJ0cmlt');
-  headers.append('Content-Type', 'application/x-www-form-urlencoded');
-  headers.append('Cache-Control', 'no-cache');
+  const headers = new HttpHeaders()
+  .append('Authorization', 'Basic YW5ndWxhcjpjZXJ0cmlt')
+  .append('Content-Type', 'application/x-www-form-urlencoded');
 
   const body = 'grant_type=refresh_token';
 
