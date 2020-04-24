@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  resp = {};
 
   constructor(private auth: LoginService,
               private router: Router ) { }
@@ -17,7 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(usuario: string, senha: string) {
-    this.auth.recuperarToken(usuario, senha)
-      .subscribe((resp: string) => console.log('aqui eu' + resp));
+    this.auth.recuperarToken(usuario, senha);
+    // this.router.navigate(['/precos']);
     }
 }

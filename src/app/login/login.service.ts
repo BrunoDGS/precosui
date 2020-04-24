@@ -21,16 +21,18 @@ export class LoginService {
     const headers = new HttpHeaders();
     headers.append('Authorization', 'Basic YW5ndWxhcjpjZXJ0cmlt');
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    // headers.append('Cache-Control', 'no-cache');
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
     return this.http.post<any>(this.oauthTokenUrl, body,
-      { headers, withCredentials: true });
+      { headers, withCredentials: true })
+      .subscribe(resp => this.armazenarToken(resp));
 
 }
-
 private armazenarToken(token: string) {
   this.jwtPayload = this.helper.decodeToken(token);
+  console.log(this.jwtPayload);
   localStorage.setItem('token', token);
 }
 
@@ -46,6 +48,7 @@ obterNovoAccessToken(): Observable<any> {
   const headers = new HttpHeaders();
   headers.append('Authorization', 'Basic YW5ndWxhcjpjZXJ0cmlt');
   headers.append('Content-Type', 'application/x-www-form-urlencoded');
+  headers.append('Cache-Control', 'no-cache');
 
   const body = 'grant_type=refresh_token';
 
