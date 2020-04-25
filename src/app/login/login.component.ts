@@ -18,6 +18,5 @@ export class LoginComponent implements OnInit {
 
   login(usuario: string, senha: string) {
     this.auth.recuperarToken(usuario, senha);
-    // this.router.navigate(['/precos']);
-    }
+  }
 }

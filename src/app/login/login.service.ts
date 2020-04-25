@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -11,7 +12,11 @@ export class LoginService {
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
   jwtPayload: any;
 
-  constructor(private http: HttpClient, private helper: JwtHelperService) {
+  constructor(
+    private http: HttpClient,
+    private helper: JwtHelperService,
+    private router: Router
+    ) {
     this.carregarToken();
    }
 
@@ -23,16 +28,22 @@ export class LoginService {
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post<any>(this.oauthTokenUrl, body,
+    this.http.post<any>(this.oauthTokenUrl, body,
       { headers, withCredentials: true })
-      .subscribe(response => {
-        this.armazenarToken(response.access_token);
+      .subscribe(resp => {
+        if (resp.error === 'invalid_grant') {
+              console.log('Usuário ou senha invalidos');
+              this.router.navigate(['/login']);
+        } else {
+          this.armazenarToken(resp.access_token);
+          this.router.navigate(['/precos']);
+        }
       });
-
 }
+
 private armazenarToken(token: string) {
   this.jwtPayload = this.helper.decodeToken(token);
-  console.log(this.jwtPayload);
+  // console.log(this.jwtPayload);
   localStorage.setItem('token', token);
 }
 
