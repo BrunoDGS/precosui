@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  erro: any;
+
 
   constructor(private auth: LoginService,
               private router: Router ) { }
@@ -19,4 +21,6 @@ export class LoginComponent implements OnInit {
   login(usuario: string, senha: string) {
     this.auth.recuperarToken(usuario, senha);
   }
+
+
 }

@@ -12,6 +12,8 @@ export class LoginService {
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
   jwtPayload: any;
 
+  erroUser: any;
+
   constructor(
     private http: HttpClient,
     private helper: JwtHelperService,
@@ -30,7 +32,10 @@ export class LoginService {
 
     this.http.post<any>(this.oauthTokenUrl, body,
       { headers, withCredentials: true })
-      .subscribe(resp => {
+      .subscribe(resp => this.armazenarToken(resp.access_token),
+      post => this.manipuladorErros(post)
+      );
+      /*.subscribe(resp => {
         if (resp.error === 'invalid_grant') {
               console.log('Usuário ou senha invalidos');
               this.router.navigate(['/login']);
@@ -38,7 +43,7 @@ export class LoginService {
           this.armazenarToken(resp.access_token);
           this.router.navigate(['/precos']);
         }
-      });
+      })*/
 }
 
 private armazenarToken(token: string) {
@@ -77,5 +82,10 @@ isAccessTokenInvalido() {
   return !token || this.helper.isTokenExpired(token);
 }
 
+manipuladorErros(erro: any) {
+
+  this.erroUser = erro.error.message;
+  console.log(this.erroUser);
+}
 
 }
