@@ -1,8 +1,10 @@
+import { ErrosManipuladorService } from './../erros/erros-manipulador.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,7 @@ export class LoginService {
     private http: HttpClient,
     private helper: JwtHelperService,
     private router: Router,
+    private errosManipuladorService: ErrosManipuladorService
     ) {
     this.carregarToken();
    }
@@ -31,9 +34,8 @@ export class LoginService {
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
     this.http.post<any>(this.oauthTokenUrl, body,
-      { headers, withCredentials: true })
+      { headers, withCredentials: true }).pipe(catchError(this.errosManipuladorService.manipuladorErros))
       .subscribe(resp => this.armazenarToken(resp.access_token),
-     // catchError => this.erroIntercepta.interceptaErro(catchError)
       );
       /*.subscribe(resp => {
         if (resp.error === 'invalid_grant') {
