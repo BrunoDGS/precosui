@@ -17,7 +17,7 @@ export class LoginService {
   constructor(
     private http: HttpClient,
     private helper: JwtHelperService,
-    private router: Router
+    private router: Router,
     ) {
     this.carregarToken();
    }
@@ -33,7 +33,7 @@ export class LoginService {
     this.http.post<any>(this.oauthTokenUrl, body,
       { headers, withCredentials: true })
       .subscribe(resp => this.armazenarToken(resp.access_token),
-      post => this.manipuladorErros(post)
+     // catchError => this.erroIntercepta.interceptaErro(catchError)
       );
       /*.subscribe(resp => {
         if (resp.error === 'invalid_grant') {
@@ -80,12 +80,6 @@ isAccessTokenInvalido() {
   const token = localStorage.getItem('token');
 
   return !token || this.helper.isTokenExpired(token);
-}
-
-manipuladorErros(erro: any) {
-
-  this.erroUser = erro.error.message;
-  console.log(this.erroUser);
 }
 
 }

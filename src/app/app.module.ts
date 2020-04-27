@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCALE_ID } from '@angular/core';
 import ptBr from '@angular/common/locales/pt';
-import { HttpClientModule, HttpClient, HttpRequest, HttpHandler, HttpHeaders } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpRequest, HttpHandler } from '@angular/common/http';
+import { HttpHeaders, HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 
@@ -27,6 +28,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { AuthGuard } from './login/auth.guard';
+import { ErrosManipuladorService } from './erros/erros-manipulador.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -63,10 +65,16 @@ export function tokenGetter() {
     {
       provide: LOCALE_ID, useValue: 'pt-PT'
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrosManipuladorService,
+      multi: true
+    },
     LoginService,
     AuthGuard,
     JwtHelperService,
-    PrecosService
+    PrecosService,
+    HttpErrorResponse
   ],
   bootstrap: [AppComponent]
 })
