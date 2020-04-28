@@ -16,8 +16,6 @@ export class PrecosProdutosComponent implements OnInit {
 
   produtos = [];
 
-
-
   constructor(
     private precosProdutosService: PrecosProdutosService,
     private login: LoginService,

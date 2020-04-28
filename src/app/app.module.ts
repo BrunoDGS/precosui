@@ -16,7 +16,6 @@ import { PrecosProdutosComponent } from './precos-produtos/precos-produtos.compo
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { PrecosService } from './login/precos.service';
-import { NegadoComponent } from './negado/negado.component';
 import { ErrosManipuladorService } from './erros/erros-manipulador.service';
 
 import { DropdownModule } from 'primeng/dropdown';
@@ -40,8 +39,7 @@ export function tokenGetter() {
     AppComponent,
     PrecosProdutosComponent,
     NavbarComponent,
-    LoginComponent,
-    NegadoComponent
+    LoginComponent
   ],
   imports: [
     DropdownModule,
