@@ -1,6 +1,6 @@
 <div class="containerPrincipal">
     <header> 
-        <p-button label="Sair" class="button button-sair" routerLink="/login"></p-button>
+        <p-button label="Sair" class="button button-sair" (click)="logout()"></p-button>
         <h2>Consulta de Preços</h2>
     </header>
 
@@ -13,7 +13,7 @@
                     [virtualScroll]="true" itemSize="10" resetFilterOnHide="true" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"></p-dropdown>
             </div>
                 <div class="ui-g-12 ui-md-12">
-                    <p-button label="Pesquisar" (click)=" pesquisarTabela()"></p-button>                
+                    <p-button label="Pesquisar" (click)="pesquisarTabela()"></p-button>                
                 </div>
             </div>
         </form>

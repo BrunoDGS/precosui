@@ -19,7 +19,7 @@ export class LoginService {
     private http: HttpClient,
     private helper: JwtHelperService,
     private router: Router,
-    private maniu: ErrosManipuladorService
+    private erros: ErrosManipuladorService
     ) {
     this.carregarToken();
    }
@@ -36,7 +36,7 @@ export class LoginService {
       { headers, withCredentials: true })
       .subscribe(
       resp => this.armazenarToken(resp.access_token),
-      error => this.maniu.manipuladorDeErros(error.error)
+      error => this.erros.manipuladorDeErros(error.error)
       );
 }
 
@@ -44,6 +44,7 @@ private armazenarToken(token: string) {
   this.jwtPayload = this.helper.decodeToken(token);
   // console.log(this.jwtPayload);
   localStorage.setItem('token', token);
+  this.router.navigate(['/precos']);
 }
 
 private carregarToken() {

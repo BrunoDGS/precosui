@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,8 +12,7 @@ export class LoginComponent implements OnInit {
   erro: any;
 
 
-  constructor(private auth: LoginService,
-              private router: Router ) { }
+  constructor(private auth: LoginService) { }
   ngOnInit(): void {
   }
 

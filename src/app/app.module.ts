@@ -4,10 +4,10 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCALE_ID } from '@angular/core';
 import ptBr from '@angular/common/locales/pt';
-import { HttpClientModule, HttpClient, HttpRequest, HttpHandler } from '@angular/common/http';
-import { HttpHeaders, HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
+registerLocaleData(ptBr);
 
 import { AppComponent } from './app.component';
 import { LoginService } from './login/login.service';
@@ -17,18 +17,17 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { PrecosService } from './login/precos.service';
 import { NegadoComponent } from './negado/negado.component';
+import { ErrosManipuladorService } from './erros/erros-manipulador.service';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
-registerLocaleData(ptBr);
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { AuthGuard } from './login/auth.guard';
-import { ErrosManipuladorService } from './erros/erros-manipulador.service';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -45,16 +44,23 @@ export function tokenGetter() {
     NegadoComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     DropdownModule,
     ButtonModule,
-    BrowserAnimationsModule,
     TableModule,
+    InputTextModule,
+
+    BrowserAnimationsModule,
+    BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    InputTextModule,
-    ToastrModule.forRoot(),
+
+    ToastrModule.forRoot({
+                  timeOut: 1000,
+                  positionClass: 'toast-top-center',
+                  preventDuplicates: true
+          }
+    ),
 
     JwtModule.forRoot({
       config: {
@@ -64,7 +70,8 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [PrecosProdutosService, FormsModule,
+
+  providers: [ PrecosProdutosService, FormsModule,
     {
       provide: LOCALE_ID, useValue: 'pt-PT'
     },
@@ -74,6 +81,7 @@ export function tokenGetter() {
     PrecosService,
     ErrosManipuladorService
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

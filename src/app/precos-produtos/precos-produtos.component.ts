@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { LoginService } from './../login/login.service';
 import { PrecosProdutosService, PrecosFilter } from './precos-produtos.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -16,7 +18,10 @@ export class PrecosProdutosComponent implements OnInit {
 
 
 
-  constructor(private precosProdutosService: PrecosProdutosService) {}
+  constructor(
+    private precosProdutosService: PrecosProdutosService,
+    private login: LoginService,
+    private router: Router) {}
 
 ngOnInit(): void {
   this.pesquisarProduto();
@@ -40,5 +45,9 @@ ngOnInit(): void {
     console.log(this.produtos);
    }
 
+   logout() {
+    this.login.limparAccessToken();
+    this.router.navigate(['/login']);
+  }
 }
 

@@ -6,13 +6,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ErrosManipuladorService {
 
-  constructor(private toasty: ToastrService) {}
+  constructor(private toastr: ToastrService) {}
 
   manipuladorDeErros(erro: any) {
     let msg: string;
     if (erro.error_description === 'Bad credentials') {
       msg = 'Usuário ou senha invalidos';
-      this.toasty.error(msg);
+      this.toastr.error(msg);
     }
   }
 }
