@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +13,13 @@ export class LoginService {
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
   jwtPayload: any;
 
-  erroUser: any;
+  erroUser: {};
 
   constructor(
     private http: HttpClient,
     private helper: JwtHelperService,
     private router: Router,
-    private errosManipuladorService: ErrosManipuladorService
+    private maniu: ErrosManipuladorService
     ) {
     this.carregarToken();
    }
@@ -34,18 +33,11 @@ export class LoginService {
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
     this.http.post<any>(this.oauthTokenUrl, body,
-      { headers, withCredentials: true }).pipe(catchError(this.errosManipuladorService.manipuladorErros))
-      .subscribe(resp => this.armazenarToken(resp.access_token),
+      { headers, withCredentials: true })
+      .subscribe(
+      resp => this.armazenarToken(resp.access_token),
+      error => this.maniu.manipuladorDeErros(error.error)
       );
-      /*.subscribe(resp => {
-        if (resp.error === 'invalid_grant') {
-              console.log('Usuário ou senha invalidos');
-              this.router.navigate(['/login']);
-        } else {
-          this.armazenarToken(resp.access_token);
-          this.router.navigate(['/precos']);
-        }
-      })*/
 }
 
 private armazenarToken(token: string) {

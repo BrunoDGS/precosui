@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'precos',
     component: PrecosProdutosComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   { path: 'acesso-negado', component: NegadoComponent },
   { path: '**', redirectTo: 'acesso-negado' }

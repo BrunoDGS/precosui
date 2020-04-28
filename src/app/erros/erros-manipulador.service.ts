@@ -1,15 +1,18 @@
-import { LoginService } from './../login/login.service';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrosManipuladorService {
 
-  constructor() { }
-  manipuladorErros(error: HttpErrorResponse) {
-     console.log('Obtido');
+  constructor(private toasty: ToastrService) {}
+
+  manipuladorDeErros(erro: any) {
+    let msg: string;
+    if (erro.error_description === 'Bad credentials') {
+      msg = 'Usuário ou senha invalidos';
+      this.toasty.error(msg);
+    }
   }
 }

@@ -30,6 +30,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthGuard } from './login/auth.guard';
 import { ErrosManipuladorService } from './erros/erros-manipulador.service';
 
+import { ToastrModule } from 'ngx-toastr';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -52,6 +54,7 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     InputTextModule,
+    ToastrModule.forRoot(),
 
     JwtModule.forRoot({
       config: {
@@ -65,16 +68,11 @@ export function tokenGetter() {
     {
       provide: LOCALE_ID, useValue: 'pt-PT'
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrosManipuladorService,
-      multi: true
-    },
     LoginService,
     AuthGuard,
     JwtHelperService,
     PrecosService,
-    HttpErrorResponse
+    ErrosManipuladorService
   ],
   bootstrap: [AppComponent]
 })
