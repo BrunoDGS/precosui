@@ -10,8 +10,10 @@
                 <div class="ui-g-12 ui-md-12 ui-fluid" style="width: 220px;">
                     <p-dropdown [options]="produtos" [filter]="true" filterBy="label" [(ngModel)]="produto" 
                     name="produto" #p placeholder="Selecione um produto" 
-                    [virtualScroll]="true" itemSize="10" resetFilterOnHide="true" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"></p-dropdown>
-            </div>
+                    [virtualScroll]="true" itemSize="10" 
+                    resetFilterOnHide="true" [showTransitionOptions]="'0ms'" 
+                    [hideTransitionOptions]="'0ms'"  autoWidth="false"></p-dropdown>
+                </div>
                 <div class="ui-g-12 ui-md-12">
                     <p-button label="Pesquisar" (click)="pesquisarTabela()"></p-button>                
                 </div>
@@ -35,7 +37,7 @@
                     <ng-template pTemplate="body" let-col>
                         <tr>
                             <td class="col-valor">
-                                {{ col.precoCooperado | currency: 'BRL' }}
+                                {{ col.precoCooperado | currency: 'BRL'}}
                             </td>   
                             <td class="col-valor">
                                 {{ col.precoNaoCooperado | currency: 'BRL' }}

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHandler } from '@angular/common/http';
 
-import { Observable, asobservablePromise, observable, asobservableFromPromisefrom } from 'rxjs';
+import { Observable } from 'rxjs';
 
 
 export class NotAuthenticatedError {}
@@ -13,7 +13,7 @@ export class NotAuthenticatedError {}
 })
 export class PrecosService extends HttpClient  {
 
-  constructor(
+ /* constructor(
     private auth: LoginService,
     private httpHandler: HttpHandler
   ) {
@@ -48,7 +48,7 @@ export class PrecosService extends HttpClient  {
     return this.fazerRequisicao<T>(() => super.put<T>(url, body, options));
   }
 
-  private fazerRequisicao<T>(fn: any): Observable<T> {
+ /* private fazerRequisicao<T>(fn: any): Observable<T> {
     if (this.auth.isAccessTokenInvalido()) {
       console.log('Requisição HTTP com access token inválido. Obtendo novo token...');
 
@@ -61,9 +61,9 @@ export class PrecosService extends HttpClient  {
           return fn().toPromise();
         });
 
-      return Observable.(chamadaNovoAccessToken);
+      console.log(chamadaNovoAccessToken);
     } else {
       return fn();
     }
-  }
+  }*/
 }

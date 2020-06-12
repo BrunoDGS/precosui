@@ -14,5 +14,11 @@ export class ErrosManipuladorService {
       msg = 'Usuário ou senha invalidos';
       this.toastr.error(msg);
     }
+
+    if (erro.error === 'invalid_token') {
+      msg = 'Token Expirado favor realizar novo Login';
+      this.toastr.error(msg);
+      console.log('passei aqui');
+    }
   }
 }
