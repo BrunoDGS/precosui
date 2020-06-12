@@ -53,7 +53,7 @@ export function tokenGetter() {
     FormsModule,
 
     ToastrModule.forRoot({
-                  timeOut: 1000,
+                  timeOut: 2000,
                   positionClass: 'toast-top-center',
                   preventDuplicates: true
           }
