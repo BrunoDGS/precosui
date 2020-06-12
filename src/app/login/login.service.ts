@@ -55,17 +55,6 @@ private carregarToken() {
   }
 }
 
-obterNovoAccessToken(): Observable<any> {
-  const headers = new HttpHeaders()
-  .append('Authorization', 'Basic YW5ndWxhcjpjZXJ0cmlt')
-  .append('Content-Type', 'application/x-www-form-urlencoded');
-
-  const body = 'grant_type=refresh_token';
-
-  return this.http.post<any>(this.oauthTokenUrl, body,
-      { headers, withCredentials: true });
-}
-
 limparAccessToken() {
   localStorage.removeItem('token');
   this.jwtPayload = null;

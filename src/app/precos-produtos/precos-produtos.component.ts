@@ -49,7 +49,6 @@ ngOnInit(): void {
           value: c.codProduto
         })
         ));
-    console.log(this.produtos);
    }
 
    logout() {
