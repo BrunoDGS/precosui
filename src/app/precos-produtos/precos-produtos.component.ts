@@ -36,7 +36,6 @@ ngOnInit(): void {
     .subscribe(
       tabelaPrecos => this.tabelaPrecos = tabelaPrecos,
       error => this.erros.manipuladorDeErros(error.error));
-    console.log(this.tabelaPrecos);
     this.tokenExpirado();
    }
 
