@@ -15,7 +15,6 @@ import { PrecosProdutosService } from './precos-produtos/precos-produtos.service
 import { PrecosProdutosComponent } from './precos-produtos/precos-produtos.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
-import { PrecosService } from './login/precos.service';
 import { ErrosManipuladorService } from './erros/erros-manipulador.service';
 
 import { DropdownModule } from 'primeng/dropdown';
@@ -76,7 +75,6 @@ export function tokenGetter() {
     LoginService,
     AuthGuard,
     JwtHelperService,
-    PrecosService,
     ErrosManipuladorService
   ],
 

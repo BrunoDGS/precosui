@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
 import { LoginService } from './../login/login.service';
-import { PrecosService } from './../login/precos.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -30,7 +29,7 @@ export class PrecosProdutosService {
 urlValores = 'http://localhost:8080/precos?';
 urlProdutos = 'http://localhost:8080/produtos';
 
-  constructor(private http: PrecosService) { }
+  constructor(private http: HttpClient) { }
 
 pesquisarProduto(): Observable<Produtos[]> {
   return this.http.get<Produtos[]>(this.urlProdutos);
