@@ -1,5 +1,3 @@
-import { Router } from '@angular/router';
-import { LoginService } from './../login/login.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,12 +7,10 @@ export interface PrecosFilter {
 }
 
 export class Produtos {
-
   codProduto: number;
   descricao: string;
 }
 export class PrecosProdutos {
-
   precoCooperado: number;
   precoNaoCooperado: number;
 }
