@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'precos',
     component: PrecosProdutosComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '' }
 ];
